@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio2</title>
+</head>
+<body>
+    <input type="text" id="nome" placeholder="Digite o seu primeiro nome:">
+    <button onclick="PegarValor()">Adicionar</button>
+    <ul id="ListaNomes"></ul>
+
+    <script>
+        var Lista=[];
+
+        function PegarValor(){
+            var N = document.getElementById("nome").value;
+
+            if (N.trim()!=="" && N.trim()!==nome){
+                Lista.push(N);  
+
+      const lista = document.getElementById("ListaNomes");
+      const item = document.createElement("li");
+      item.textContent = N;
+      const botaoRemover = document.createElement("button");
+                botaoRemover.textContent = "Remover";
+      lista.appendChild(item);
+       botaoRemover.onclick = function(){
+                    lista.removeChild(item);
+       
+       Lista = Lista.filter(nome => nome !== N);
+                };
+                item.appendChild(botaoRemover);
+                lista.appendChild(item);
+
+                document.getElementById("nome").value = "";
+            }
+            else{
+                alert("Nenhum nome foi inserido!")
+            }
+        }
+    </script>
+</body>
+</html>
