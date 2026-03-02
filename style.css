@@ -1,5 +1,6 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
 }
 
 li{
@@ -29,4 +30,12 @@ button{
     50% { transform: translateX(2px); }
     75% { transform: translateX(-2px); }
     100% { transform: translateX(0px); }
+}
+
+.input-area{
+    margin-bottom: 20px;
+}
+
+.paginacao{
+    margin-top: 20px;
 }

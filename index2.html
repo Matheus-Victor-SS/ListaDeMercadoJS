@@ -2,18 +2,30 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de compras</title>
+    <title>Lista de Compras</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    
-<input type="text" id="nome" placeholder="Produto">
-<input type="number" id="quantidade" placeholder="Qtd" min="1">
-<button onclick="PegarValor()">Adicionar</button>
 
-<ul id="ListaNomes"></ul>
+<h2>Lista de Compras</h2>
+
+<div class="input-area">
+    <input type="text" id="nome" placeholder="Produto">
+    <input type="number" id="quantidade" placeholder="Qtd" min="1">
+    <button onclick="adicionarItem()">Adicionar</button>
+</div>
+
+<ul id="lista"></ul>
+
+<div class="paginacao">
+    <button onclick="paginaAnterior()"><i class="fa-solid fa-arrow-left"></i></button>
+    <span id="infoPagina"></span>
+    <button onclick="proximaPagina()"><i class="fa-solid fa-arrow-right"></i></button>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
