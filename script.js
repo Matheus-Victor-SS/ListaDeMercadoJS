@@ -11,22 +11,25 @@ function adicionarItem(){
     let nome = nomeInput.value.trim().toLowerCase();
     let qtd = qtdInput.value.trim();
 
+    erro.style.display = "none";
     erro.textContent = "";
 
     if(nome === "" || qtd === ""){
-        erro.textContent = "Preencha produto e quantidade.";
+        erro.textContent = "Preencha o nome do produto e a quantidade.";
+        erro.style.display = "block";
         return;
     }
 
-    // Verifica se já existe produto com mesmo nome
     let existe = lista.some(item => item.nome.toLowerCase() === nome);
 
     if(existe){
-    erro.textContent = "⚠ Este produto já foi inserido na lista. Não é possível adicionar itens repetidos.";
-    return;
-}
+        erro.textContent = "Este produto já foi inserido na lista. Não é permitido adicionar produtos repetidos.";
+        erro.style.display = "block";
+        return;
+    }
 
     lista.push({nome: nomeInput.value.trim(), qtd: qtd});
+
     nomeInput.value = "";
     qtdInput.value = "";
 

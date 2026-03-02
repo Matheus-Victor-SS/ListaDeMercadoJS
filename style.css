@@ -36,28 +36,25 @@ h2{
     margin-bottom: 20px;
 }
 
-/* INPUT AREA */
 .input-area{
     width: 100%;
     margin-bottom: 20px;
-}
-
-.inputs{
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    width: 100%;
 }
 
-.inputs input{
-    flex: 1;
+.input-area input{
+    width: 100%;
     padding: 8px;
     border-radius: 6px;
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
 
-.inputs button{
-    padding: 8px 14px;
+.btn-adicionar{
+    width: 100%;
+    padding: 10px;
     border-radius: 6px;
     border: none;
     background-color: #4a90e2;
@@ -66,23 +63,21 @@ h2{
     transition: 0.2s;
 }
 
-.inputs button:hover{
+.btn-adicionar:hover{
     background-color: #357bd8;
 }
 
-/* ERRO */
+/* ERRO ESCONDIDO POR PADRÃO */
 .erro{
+    display: none;
     width: 100%;
-    margin-top: 8px;
     padding: 8px;
     border-radius: 6px;
     background-color: #ffe6e6;
     color: #cc0000;
     font-size: 14px;
-    min-height: 20px;
     box-sizing: border-box;
 }
-
 /* LISTA */
 ul{
     list-style: none;
