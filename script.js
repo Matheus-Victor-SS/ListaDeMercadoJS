@@ -34,8 +34,15 @@ function renderizarLista(){
 
         let li = document.createElement("li");
 
-        let span = document.createElement("span");
-        span.textContent = `${item.nome} - ${item.qtd}x`;
+        // NOME
+        let spanNome = document.createElement("span");
+        spanNome.classList.add("nome-produto");
+        spanNome.textContent = item.nome;
+
+        // QUANTIDADE
+        let spanQtd = document.createElement("span");
+        spanQtd.classList.add("quantidade");
+        spanQtd.textContent = item.qtd + "x";
 
         // EDITAR
         let botaoEditar = document.createElement("button");
@@ -45,20 +52,28 @@ function renderizarLista(){
 
             li.classList.add("editando");
 
-            span.contentEditable = true;
-            span.focus();
+            spanNome.contentEditable = true;
+            spanQtd.contentEditable = true;
 
-            span.onblur = function(){
+            spanNome.focus();
 
-                let texto = span.textContent.split("-");
-                if(texto.length >= 2){
-                    item.nome = texto[0].trim();
-                    item.qtd = texto[1].replace("x","").trim();
-                }
+            function finalizarEdicao(){
+                item.nome = spanNome.textContent.trim();
+                item.qtd = spanQtd.textContent.replace("x","").trim();
 
-                span.contentEditable = false;
+                spanNome.contentEditable = false;
+                spanQtd.contentEditable = false;
+
+                spanQtd.textContent = item.qtd + "x";
+
                 li.classList.remove("editando");
-            };
+
+                spanNome.removeEventListener("blur", finalizarEdicao);
+                spanQtd.removeEventListener("blur", finalizarEdicao);
+            }
+
+            spanNome.addEventListener("blur", finalizarEdicao);
+            spanQtd.addEventListener("blur", finalizarEdicao);
         };
 
         // REMOVER
@@ -70,7 +85,8 @@ function renderizarLista(){
             renderizarLista();
         };
 
-        li.appendChild(span);
+        li.appendChild(spanNome);
+        li.appendChild(spanQtd);
         li.appendChild(botaoEditar);
         li.appendChild(botaoRemover);
 
