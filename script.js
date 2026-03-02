@@ -1,6 +1,6 @@
 let lista = [];
 let paginaAtual = 1;
-const itensPorPagina = 15;
+const itensPorPagina = 7;
 
 function adicionarItem(){
 
@@ -44,7 +44,7 @@ function renderizarLista(){
         spanQtd.classList.add("quantidade");
         spanQtd.textContent = item.qtd + "x";
 
-        // EDITAR
+        // BOTÃO EDITAR
         let botaoEditar = document.createElement("button");
         botaoEditar.innerHTML = '<i class="fa-solid fa-pen"></i>';
 
@@ -52,31 +52,44 @@ function renderizarLista(){
 
             li.classList.add("editando");
 
-            spanNome.contentEditable = true;
-            spanQtd.contentEditable = true;
+            // transforma em input ao invés de contentEditable
+            let inputNome = document.createElement("input");
+            inputNome.value = item.nome;
+            inputNome.classList.add("input-edicao");
 
-            spanNome.focus();
+            let inputQtd = document.createElement("input");
+            inputQtd.type = "number";
+            inputQtd.min = "1";
+            inputQtd.value = item.qtd;
+            inputQtd.classList.add("input-edicao-qtd");
 
-            function finalizarEdicao(){
-                item.nome = spanNome.textContent.trim();
-                item.qtd = spanQtd.textContent.replace("x","").trim();
+            li.replaceChild(inputNome, spanNome);
+            li.replaceChild(inputQtd, spanQtd);
 
-                spanNome.contentEditable = false;
-                spanQtd.contentEditable = false;
+            inputNome.focus();
 
+            function salvarEdicao(){
+
+                item.nome = inputNome.value.trim();
+                item.qtd = inputQtd.value.trim();
+
+                spanNome.textContent = item.nome;
                 spanQtd.textContent = item.qtd + "x";
+
+                li.replaceChild(spanNome, inputNome);
+                li.replaceChild(spanQtd, inputQtd);
 
                 li.classList.remove("editando");
 
-                spanNome.removeEventListener("blur", finalizarEdicao);
-                spanQtd.removeEventListener("blur", finalizarEdicao);
+                inputNome.removeEventListener("blur", salvarEdicao);
+                inputQtd.removeEventListener("blur", salvarEdicao);
             }
 
-            spanNome.addEventListener("blur", finalizarEdicao);
-            spanQtd.addEventListener("blur", finalizarEdicao);
+            inputNome.addEventListener("blur", salvarEdicao);
+            inputQtd.addEventListener("blur", salvarEdicao);
         };
 
-        // REMOVER
+        // BOTÃO REMOVER
         let botaoRemover = document.createElement("button");
         botaoRemover.innerHTML = '<i class="fa-solid fa-trash"></i>';
 

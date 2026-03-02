@@ -1,32 +1,67 @@
 body{
+    background-color: #f4f4f4;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+/* CADERNINHO */
+.container{
+    background: white;
+    width: 450px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+/* Linha lateral do caderno */
+.container::before{
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: #ff4d4d;
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .input-area{
+    display: flex;
+    gap: 10px;
     margin-bottom: 20px;
+}
+
+input{
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 ul{
     list-style: none;
     padding: 0;
-    max-width: 500px;
 }
 
 li{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 6px;
-    background-color: #f3f3f3;
-    transition: 0.2s ease;
+    padding: 8px 10px 8px 50px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: 0.2s;
 }
 
 li.editando{
-    background-color: #e6f0ff;
-    box-shadow: 0 0 0 2px #4a90e2;
+    background-color: #eef5ff;
+    border-radius: 6px;
 }
 
 .nome-produto{
@@ -34,19 +69,31 @@ li.editando{
 }
 
 .quantidade{
-    width: 60px;
+    width: 50px;
     text-align: right;
     margin-right: 10px;
 }
 
 button{
-    cursor: pointer;
     border: none;
     background: none;
+    cursor: pointer;
     font-size: 16px;
-    margin-left: 8px;
+    margin-left: 6px;
+}
+
+.input-edicao{
+    flex: 1;
+}
+
+.input-edicao-qtd{
+    width: 50px;
+    text-align: right;
 }
 
 .paginacao{
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
+    gap: 10px;
 }

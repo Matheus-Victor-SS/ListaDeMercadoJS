@@ -9,21 +9,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+<div class="container">
 
-<h2>Lista de Compras</h2>
+    <h2>Lista de Compras</h2>
 
-<div class="input-area">
-    <input type="text" id="nome" placeholder="Produto">
-    <input type="number" id="quantidade" placeholder="Qtd" min="1">
-    <button onclick="adicionarItem()">Adicionar</button>
-</div>
+    <div class="input-area">
+        <input type="text" id="nome" placeholder="Produto">
+        <input type="number" id="quantidade" placeholder="Qtd" min="1">
+        <button onclick="adicionarItem()">Adicionar</button>
+    </div>
 
-<ul id="lista"></ul>
+    <ul id="lista"></ul>
 
-<div class="paginacao">
-    <button onclick="paginaAnterior()"><i class="fa-solid fa-arrow-left"></i></button>
-    <span id="infoPagina"></span>
-    <button onclick="proximaPagina()"><i class="fa-solid fa-arrow-right"></i></button>
+    <div class="paginacao">
+        <button onclick="paginaAnterior()"><i class="fa-solid fa-arrow-left"></i></button>
+        <span id="infoPagina"></span>
+        <button onclick="proximaPagina()"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
 </div>
 
 <script src="script.js"></script>
