@@ -59,7 +59,8 @@ function renderizarLista(){
         spanQtd.textContent = item.qtd + "x";
 
         let botaoEditar = document.createElement("button");
-        botaoEditar.innerHTML = '<i class="fa-solid fa-pen"></i>';
+botaoEditar.innerHTML = '<i class="fa-solid fa-pen"></i>';
+botaoEditar.classList.add("botao-editar");
 
         botaoEditar.onclick = function(){
 
@@ -108,7 +109,8 @@ function renderizarLista(){
         };
 
         let botaoRemover = document.createElement("button");
-        botaoRemover.innerHTML = '<i class="fa-solid fa-trash"></i>';
+botaoRemover.innerHTML = '<i class="fa-solid fa-trash"></i>';
+botaoRemover.classList.add("botao-remover");
 
         botaoRemover.onclick = function(){
             lista.splice(inicio + index, 1);

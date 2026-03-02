@@ -1,47 +1,86 @@
 body{
-    background-color: #f4f4f4;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
     padding: 40px 15px;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    /* FUNDO AZUL CLARO COM BOLAS */
+    background-color: #eaf4ff;
+    position: relative;
 }
 
-/* CONTAINER PRINCIPAL */
+/* BOLAS FLUTUANDO */
+body::before,
+body::after{
+    content: "";
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: rgba(100,170,255,0.15);
+    border-radius: 50%;
+    z-index: -1;
+    animation: flutuar 8s ease-in-out infinite alternate;
+}
+
+body::before{
+    top: -100px;
+    left: -100px;
+}
+
+body::after{
+    bottom: -150px;
+    right: -120px;
+    animation-delay: 2s;
+}
+
+@keyframes flutuar{
+    from{ transform: translateY(0px); }
+    to{ transform: translateY(30px); }
+}
+
+/* CADERNO */
 .container{
-    background: white;
+    background: #fff8dc; /* amarelado */
     width: 450px;
     max-width: 100%;
-    padding: 30px 30px 30px 60px; /* espaço para linha lateral */
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 30px 30px 30px 70px;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     position: relative;
     box-sizing: border-box;
 }
 
-/* LINHA VERMELHA DO CADERNO */
+/* LINHA VERMELHA */
 .container::before{
     content: "";
     position: absolute;
-    left: 35px;
+    left: 50px;
     top: 20px;
     bottom: 20px;
     width: 2px;
-    background: #ff4d4d;
-    border-radius: 2px;
+    background: #ff6b6b;
 }
 
-/* TÍTULO */
-h2{
-    text-align: center;
-    margin-bottom: 20px;
+/* ESPIRAL */
+.container::after{
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    bottom: 20px;
+    width: 20px;
+    background-image: radial-gradient(circle, #999 3px, transparent 4px);
+    background-size: 20px 25px;
 }
 
+/* INPUT AREA */
 .input-area{
-    width: 100%;
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
 .input-area input{
@@ -67,17 +106,16 @@ h2{
     background-color: #357bd8;
 }
 
-/* ERRO ESCONDIDO POR PADRÃO */
+/* ERRO */
 .erro{
     display: none;
-    width: 100%;
     padding: 8px;
     border-radius: 6px;
     background-color: #ffe6e6;
     color: #cc0000;
     font-size: 14px;
-    box-sizing: border-box;
 }
+
 /* LISTA */
 ul{
     list-style: none;
@@ -88,33 +126,55 @@ ul{
 li{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
     padding: 8px 0;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 li.editando{
     background-color: #eef5ff;
     border-radius: 6px;
-    padding: 8px;
+    padding: 6px;
 }
 
+/* NOME */
 .nome-produto{
     flex: 1;
+    word-break: break-word;
 }
 
+/* QUANTIDADE FIXA */
 .quantidade{
     width: 50px;
     text-align: right;
-    margin-right: 10px;
 }
 
+/* INPUTS DE EDIÇÃO */
+.input-edicao{
+    flex: 1;
+}
+
+.input-edicao-qtd{
+    width: 50px; /* FIXO pra não empurrar botão */
+    text-align: right;
+}
+
+/* BOTÕES */
 button{
     border: none;
     background: none;
     cursor: pointer;
     font-size: 16px;
-    margin-left: 6px;
+}
+
+/* EDITAR AZUL CLARO */
+.botao-editar{
+    color: #5dade2;
+}
+
+/* LIXEIRA VERMELHA */
+.botao-remover{
+    color: #e74c3c;
 }
 
 /* PAGINAÇÃO */
@@ -122,33 +182,29 @@ button{
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    gap: 10px;
+    gap: 15px;
 }
 
 /* RESPONSIVO */
 @media (max-width: 600px){
 
-    body{
-        padding: 20px 10px;
-    }
-
     .container{
-        padding: 25px 20px 25px 50px;
+        padding: 25px 20px 25px 60px;
     }
 
     .container::before{
-        left: 25px;
+        left: 45px;
     }
 
-    .inputs{
-        flex-direction: column;
-    }
-
-    .inputs button{
-        width: 100%;
+    .container::after{
+        left: 10px;
     }
 
     .quantidade{
+        width: 40px;
+    }
+
+    .input-edicao-qtd{
         width: 40px;
     }
 }
