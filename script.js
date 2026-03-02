@@ -22,9 +22,9 @@ function adicionarItem(){
     let existe = lista.some(item => item.nome.toLowerCase() === nome);
 
     if(existe){
-        erro.textContent = "Este produto já foi inserido.";
-        return;
-    }
+    erro.textContent = "⚠ Este produto já foi inserido na lista. Não é possível adicionar itens repetidos.";
+    return;
+}
 
     lista.push({nome: nomeInput.value.trim(), qtd: qtd});
     nomeInput.value = "";
