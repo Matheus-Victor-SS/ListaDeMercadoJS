@@ -3,30 +3,34 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
-    padding: 40px;
+    padding: 40px 15px;
 }
 
-/* CADERNINHO */
+/* CONTAINER PRINCIPAL */
 .container{
     background: white;
     width: 450px;
-    padding: 30px;
+    max-width: 100%;
+    padding: 30px 30px 30px 60px; /* espaço para linha lateral */
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     position: relative;
+    box-sizing: border-box;
 }
 
-/* Linha lateral do caderno */
+/* LINHA VERMELHA DO CADERNO */
 .container::before{
     content: "";
     position: absolute;
-    left: 40px;
-    top: 0;
-    height: 100%;
+    left: 35px;
+    top: 20px;
+    bottom: 20px;
     width: 2px;
     background: #ff4d4d;
+    border-radius: 2px;
 }
 
+/* TÍTULO */
 h2{
     text-align: center;
     margin-bottom: 20px;
@@ -34,8 +38,8 @@ h2{
 
 /* INPUT AREA */
 .input-area{
-    margin-bottom: 20px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .inputs{
@@ -49,6 +53,7 @@ h2{
     padding: 8px;
     border-radius: 6px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 .inputs button{
@@ -65,7 +70,7 @@ h2{
     background-color: #357bd8;
 }
 
-/* ERRO GRANDE E VISÍVEL */
+/* ERRO */
 .erro{
     width: 100%;
     margin-top: 8px;
@@ -74,60 +79,29 @@ h2{
     background-color: #ffe6e6;
     color: #cc0000;
     font-size: 14px;
-    min-height: 22px;
+    min-height: 20px;
     box-sizing: border-box;
 }
 
-/* RESPONSIVO */
-@media (max-width: 600px){
-
-    body{
-        padding: 15px;
-    }
-
-    .container{
-        width: 100%;
-        padding: 20px;
-    }
-
-    .inputs{
-        flex-direction: column;
-    }
-
-    .inputs input{
-        width: 100%;
-    }
-
-    .inputs button{
-        width: 100%;
-    }
-
-    li{
-        padding-left: 20px;
-    }
-
-    .quantidade{
-        width: 40px;
-    }
-}
+/* LISTA */
 ul{
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 li{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 10px 8px 50px;
-    margin-bottom: 6px;
+    padding: 8px 0;
     border-bottom: 1px solid #e0e0e0;
-    transition: 0.2s;
 }
 
 li.editando{
     background-color: #eef5ff;
     border-radius: 6px;
+    padding: 8px;
 }
 
 .nome-produto{
@@ -148,29 +122,38 @@ button{
     margin-left: 6px;
 }
 
-.input-edicao{
-    flex: 1;
-}
-
-.input-edicao-qtd{
-    width: 50px;
-    text-align: right;
-}
-
+/* PAGINAÇÃO */
 .paginacao{
     display: flex;
     justify-content: center;
     margin-top: 20px;
     gap: 10px;
 }
-.inputs{
-    display: flex;
-    gap: 10px;
-}
 
-.erro{
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-    height: 18px;
+/* RESPONSIVO */
+@media (max-width: 600px){
+
+    body{
+        padding: 20px 10px;
+    }
+
+    .container{
+        padding: 25px 20px 25px 50px;
+    }
+
+    .container::before{
+        left: 25px;
+    }
+
+    .inputs{
+        flex-direction: column;
+    }
+
+    .inputs button{
+        width: 100%;
+    }
+
+    .quantidade{
+        width: 40px;
+    }
 }
