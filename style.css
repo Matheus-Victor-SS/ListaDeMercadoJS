@@ -4,14 +4,12 @@ body{
     justify-content: center;
     padding: 40px 15px;
     min-height: 100vh;
-    overflow-x: hidden;
-
-    /* FUNDO AZUL CLARO COM BOLAS */
     background-color: #eaf4ff;
     position: relative;
+    overflow-x: hidden;
 }
 
-/* BOLAS FLUTUANDO */
+/* BOLAS FUNDO */
 body::before,
 body::after{
     content: "";
@@ -42,7 +40,7 @@ body::after{
 
 /* CADERNO */
 .container{
-    background: #fff8dc; /* amarelado */
+    background: #fff8dc;
     width: 450px;
     max-width: 100%;
     padding: 30px 30px 30px 70px;
@@ -50,17 +48,6 @@ body::after{
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     position: relative;
     box-sizing: border-box;
-}
-
-/* LINHA VERMELHA */
-.container::before{
-    content: "";
-    position: absolute;
-    left: 50px;
-    top: 20px;
-    bottom: 20px;
-    width: 2px;
-    background: #ff6b6b;
 }
 
 /* ESPIRAL */
@@ -75,7 +62,18 @@ body::after{
     background-size: 20px 25px;
 }
 
-/* INPUT AREA */
+/* LINHA */
+.container::before{
+    content: "";
+    position: absolute;
+    left: 50px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: #ff6b6b;
+}
+
+/* INPUT */
 .input-area{
     display: flex;
     flex-direction: column;
@@ -88,7 +86,6 @@ body::after{
     padding: 8px;
     border-radius: 6px;
     border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
 .btn-adicionar{
@@ -99,11 +96,6 @@ body::after{
     background-color: #4a90e2;
     color: white;
     cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn-adicionar:hover{
-    background-color: #357bd8;
 }
 
 /* ERRO */
@@ -113,7 +105,6 @@ body::after{
     border-radius: 6px;
     background-color: #ffe6e6;
     color: #cc0000;
-    font-size: 14px;
 }
 
 /* LISTA */
@@ -121,6 +112,27 @@ ul{
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+/* ALTURA CONTROLADA (7 ITENS) */
+ul{
+    min-height: 280px; /* espaço aproximado de 7 linhas */
+}
+
+/* ANIMAÇÃO DE TROCA */
+.animar{
+    animation: virarPagina 0.4s ease;
+}
+
+@keyframes virarPagina{
+    from{
+        transform: rotateY(90deg);
+        opacity: 0;
+    }
+    to{
+        transform: rotateY(0);
+        opacity: 1;
+    }
 }
 
 li{
@@ -131,80 +143,54 @@ li{
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-li.editando{
-    background-color: #eef5ff;
-    border-radius: 6px;
-    padding: 6px;
-}
-
-/* NOME */
 .nome-produto{
     flex: 1;
-    word-break: break-word;
 }
 
-/* QUANTIDADE FIXA */
 .quantidade{
     width: 50px;
     text-align: right;
 }
 
-/* INPUTS DE EDIÇÃO */
-.input-edicao{
-    flex: 1;
-}
-
 .input-edicao-qtd{
-    width: 50px; /* FIXO pra não empurrar botão */
+    width: 50px;
     text-align: right;
 }
 
 /* BOTÕES */
-button{
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-/* EDITAR AZUL CLARO */
 .botao-editar{
     color: #5dade2;
 }
 
-/* LIXEIRA VERMELHA */
 .botao-remover{
     color: #e74c3c;
 }
 
-/* PAGINAÇÃO */
-.paginacao{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    gap: 15px;
+/* NÚMERO DA PÁGINA */
+.numero-pagina{
+    text-align: center;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-/* RESPONSIVO */
-@media (max-width: 600px){
+/* FOLHA DOBRADA + SETA */
+.virar-pagina{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: #ff4d4d;
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 15px;
+    cursor: pointer;
+}
 
-    .container{
-        padding: 25px 20px 25px 60px;
-    }
-
-    .container::before{
-        left: 45px;
-    }
-
-    .container::after{
-        left: 10px;
-    }
-
-    .quantidade{
-        width: 40px;
-    }
-
-    .input-edicao-qtd{
-        width: 40px;
-    }
+.virar-pagina i{
+    color: white;
+    font-size: 28px;
 }

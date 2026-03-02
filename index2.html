@@ -2,38 +2,48 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Compras</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-<div class="container">
 
-    <h2>Lista de Compras</h2>
+    <div class="container">
 
-<div class="input-area">
+        <h2>Lista de Compras</h2>
 
-    <input type="text" id="nome" placeholder="Produto">
-    <input type="number" id="quantidade" placeholder="Qtd" min="1">
+        <div class="input-area">
 
-    <button class="btn-adicionar" onclick="adicionarItem()">Adicionar</button>
+            <input type="text" id="nome" placeholder="Produto">
+            <input type="number" id="quantidade" placeholder="Qtd" min="1">
 
-    <div id="erro" class="erro"></div>
+            <button class="btn-adicionar" onclick="adicionarItem()">
+                Adicionar
+            </button>
 
-</div>
+            <div id="erro" class="erro"></div>
 
-    <ul id="lista"></ul>
+        </div>
 
-    <div class="paginacao">
-        <button onclick="paginaAnterior()"><i class="fa-solid fa-arrow-left"></i></button>
-        <span id="infoPagina"></span>
-        <button onclick="proximaPagina()"><i class="fa-solid fa-arrow-right"></i></button>
+        <ul id="lista"></ul>
+
+        <div class="numero-pagina" id="numeroPagina">1</div>
+
     </div>
 
-</div>
+    <!-- Folha dobrada com seta -->
+    <div class="virar-pagina" onclick="proximaPagina()">
+        <i class="fa-solid fa-arrow-right"></i>
+    </div>
 
-<script src="script.js"></script>
+    <!-- JS -->
+    <script src="script.js"></script>
+
 </body>
 </html>

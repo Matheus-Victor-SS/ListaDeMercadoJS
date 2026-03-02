@@ -128,16 +128,23 @@ botaoRemover.classList.add("botao-remover");
     atualizarInfoPagina();
 }
 function atualizarInfoPagina(){
-    const totalPaginas = Math.ceil(lista.length / itensPorPagina) || 1;
-    document.getElementById("infoPagina").textContent =
-        `Página ${paginaAtual} de ${totalPaginas}`;
+    document.getElementById("numeroPagina").textContent = paginaAtual;
 }
 
 function proximaPagina(){
+
     const totalPaginas = Math.ceil(lista.length / itensPorPagina);
+
     if(paginaAtual < totalPaginas){
         paginaAtual++;
-        renderizarLista();
+
+        const ul = document.getElementById("lista");
+        ul.classList.add("animar");
+
+        setTimeout(() => {
+            renderizarLista();
+            ul.classList.remove("animar");
+        }, 200);
     }
 }
 
