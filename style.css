@@ -97,3 +97,14 @@ button{
     margin-top: 20px;
     gap: 10px;
 }
+.inputs{
+    display: flex;
+    gap: 10px;
+}
+
+.erro{
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    height: 18px;
+}

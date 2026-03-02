@@ -1,23 +1,36 @@
 let lista = [];
 let paginaAtual = 1;
-const itensPorPagina = 7;
+const itensPorPagina = 10;
 
 function adicionarItem(){
 
     let nomeInput = document.getElementById("nome");
     let qtdInput = document.getElementById("quantidade");
+    let erro = document.getElementById("erro");
 
-    let nome = nomeInput.value.trim();
+    let nome = nomeInput.value.trim().toLowerCase();
     let qtd = qtdInput.value.trim();
 
-    if(nome !== "" && qtd !== ""){
+    erro.textContent = "";
 
-        lista.push({nome: nome, qtd: qtd});
-        nomeInput.value = "";
-        qtdInput.value = "";
-
-        renderizarLista();
+    if(nome === "" || qtd === ""){
+        erro.textContent = "Preencha produto e quantidade.";
+        return;
     }
+
+    // Verifica se já existe produto com mesmo nome
+    let existe = lista.some(item => item.nome.toLowerCase() === nome);
+
+    if(existe){
+        erro.textContent = "Este produto já foi inserido.";
+        return;
+    }
+
+    lista.push({nome: nomeInput.value.trim(), qtd: qtd});
+    nomeInput.value = "";
+    qtdInput.value = "";
+
+    renderizarLista();
 }
 
 function renderizarLista(){
@@ -34,17 +47,14 @@ function renderizarLista(){
 
         let li = document.createElement("li");
 
-        // NOME
         let spanNome = document.createElement("span");
         spanNome.classList.add("nome-produto");
         spanNome.textContent = item.nome;
 
-        // QUANTIDADE
         let spanQtd = document.createElement("span");
         spanQtd.classList.add("quantidade");
         spanQtd.textContent = item.qtd + "x";
 
-        // BOTÃO EDITAR
         let botaoEditar = document.createElement("button");
         botaoEditar.innerHTML = '<i class="fa-solid fa-pen"></i>';
 
@@ -52,7 +62,6 @@ function renderizarLista(){
 
             li.classList.add("editando");
 
-            // transforma em input ao invés de contentEditable
             let inputNome = document.createElement("input");
             inputNome.value = item.nome;
             inputNome.classList.add("input-edicao");
@@ -68,7 +77,13 @@ function renderizarLista(){
 
             inputNome.focus();
 
-            function salvarEdicao(){
+            function salvarSeClicarFora(e){
+                if(!li.contains(e.target)){
+                    salvar();
+                }
+            }
+
+            function salvar(){
 
                 item.nome = inputNome.value.trim();
                 item.qtd = inputQtd.value.trim();
@@ -81,15 +96,14 @@ function renderizarLista(){
 
                 li.classList.remove("editando");
 
-                inputNome.removeEventListener("blur", salvarEdicao);
-                inputQtd.removeEventListener("blur", salvarEdicao);
+                document.removeEventListener("click", salvarSeClicarFora);
             }
 
-            inputNome.addEventListener("blur", salvarEdicao);
-            inputQtd.addEventListener("blur", salvarEdicao);
+            setTimeout(() => {
+                document.addEventListener("click", salvarSeClicarFora);
+            }, 0);
         };
 
-        // BOTÃO REMOVER
         let botaoRemover = document.createElement("button");
         botaoRemover.innerHTML = '<i class="fa-solid fa-trash"></i>';
 
@@ -108,7 +122,6 @@ function renderizarLista(){
 
     atualizarInfoPagina();
 }
-
 function atualizarInfoPagina(){
     const totalPaginas = Math.ceil(lista.length / itensPorPagina) || 1;
     document.getElementById("infoPagina").textContent =
