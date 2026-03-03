@@ -1,3 +1,4 @@
+/* ===== BODY ===== */
 body{
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
@@ -9,7 +10,7 @@ body{
     overflow-x: hidden;
 }
 
-/* BOLAS FUNDO */
+/* ===== BOLAS FLUTUANDO ===== */
 body::before,
 body::after{
     content: "";
@@ -38,81 +39,74 @@ body::after{
     to{ transform: translateY(30px); }
 }
 
-/* CADERNO */
+/* ===== CADERNO ===== */
 .container{
     background: #fff8dc;
-    width: 450px;
+    width: 500px; 
     max-width: 100%;
-    padding: 30px 30px 60px 70px;
+    padding: 30px 30px 80px 70px;
     border-radius: 12px;
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     position: relative;
     box-sizing: border-box;
-    display: inline-block; /* faz ele terminar onde o conteúdo termina */
 }
 
-/* LISTA */
-ul{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* REMOVE ALTURA FIXA */
-ul{
-    min-height: unset;
-}
-
-/* NÚMERO DA PÁGINA */
-.numero-pagina{
-    text-align: center;
-    margin-top: 15px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* FOLHA DOBRADA NO CANTO DO CADERNO */
-.virar-pagina{
+/* ===== ESPIRAL LATERAL ===== */
+.container::before{
+    content: "";
     position: absolute;
+    left: 25px;
+    top: 20px;
+    bottom: 20px;
+    width: 6px;
+    background: repeating-linear-gradient(
+        to bottom,
+        #999,
+        #999 6px,
+        transparent 6px,
+        transparent 20px
+    );
+}
+
+.container::after{
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: 0;
     bottom: 0;
-    right: 0;
-    width: 80px;
-    height: 80px;
+    width: 2px;
     background: #ff4d4d;
-    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+
+/* ===== INPUT AREA ===== */
+.input-area{
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: 12px;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input{
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ===== BOTÃO ADICIONAR ===== */
+.btn-adicionar{
+    background: #5dade2;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
     cursor: pointer;
 }
 
-.virar-pagina i{
-    color: white;
-    font-size: 22px;
+.btn-adicionar:hover{
+    opacity: 0.9;
 }
 
-/* BOTÃO VOLTAR */
-.voltar-pagina{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 80px;
-    height: 80px;
-    background: #ff4d4d;
-    clip-path: polygon(0 0, 0 100%, 100% 100%);
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: 12px;
-    cursor: pointer;
-}
-
-.voltar-pagina i{
-    color: white;
-    font-size: 22px;
-}
-/* ERRO */
+/* ===== ERRO ===== */
 .erro{
     display: none;
     padding: 8px;
@@ -121,32 +115,12 @@ ul{
     color: #cc0000;
 }
 
-/* LISTA */
+/* ===== LISTA ===== */
 ul{
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-/* ALTURA CONTROLADA (7 ITENS) */
-ul{
-    min-height: 280px; /* espaço aproximado de 7 linhas */
-}
-
-/* ANIMAÇÃO DE TROCA */
-.animar{
-    animation: virarPagina 0.4s ease;
-}
-
-@keyframes virarPagina{
-    from{
-        transform: rotateY(90deg);
-        opacity: 0;
-    }
-    to{
-        transform: rotateY(0);
-        opacity: 1;
-    }
+    min-height: 280px; /* espaço para ~7 itens */
 }
 
 li{
@@ -171,16 +145,18 @@ li{
     text-align: right;
 }
 
-/* BOTÕES */
+/* ===== BOTÕES ===== */
 .botao-editar{
     color: #5dade2;
+    cursor: pointer;
 }
 
 .botao-remover{
     color: #e74c3c;
+    cursor: pointer;
 }
 
-/* NÚMERO DA PÁGINA */
+/* ===== NÚMERO DA PÁGINA ===== */
 .numero-pagina{
     text-align: center;
     margin-top: 15px;
@@ -188,13 +164,13 @@ li{
     font-weight: bold;
 }
 
-/* FOLHA DOBRADA + SETA */
+/* ===== SETA VIRAR PÁGINA ===== */
 .virar-pagina{
-    position: fixed;
+    position: absolute;
     bottom: 0;
     right: 0;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     background: #ff4d4d;
     clip-path: polygon(0 100%, 100% 0, 100% 100%);
     display: flex;
@@ -206,5 +182,42 @@ li{
 
 .virar-pagina i{
     color: white;
-    font-size: 28px;
+    font-size: 26px;
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.voltar-pagina{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 90px;
+    height: 90px;
+    background: #ff4d4d;
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.voltar-pagina i{
+    color: white;
+    font-size: 26px;
+}
+
+/* ===== ANIMAÇÃO DE VIRAR ===== */
+.animar{
+    animation: virarPagina 0.4s ease;
+}
+
+@keyframes virarPagina{
+    from{
+        transform: rotateY(90deg);
+        opacity: 0;
+    }
+    to{
+        transform: rotateY(0);
+        opacity: 1;
+    }
 }
