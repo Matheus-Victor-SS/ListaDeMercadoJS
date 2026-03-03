@@ -1,6 +1,6 @@
 let lista = [];
 let paginaAtual = 1;
-const itensPorPagina = 8; // Reduzido para 8 itens por página (tela menor)
+const itensPorPagina = 8;
 let itemEditando = null;
 
 function adicionarItem(){
@@ -33,7 +33,7 @@ function adicionarItem(){
     lista.push({
         nome: nome,
         qtd: qtd,
-        checked: false // Adiciona propriedade checked
+        checked: false
     });
     
     nomeInput.value = "";
@@ -76,6 +76,7 @@ function renderizarLista(){
             inputQtd.min = "1";
             inputQtd.classList.add("input-edicao-qtd");
 
+            // SOMENTE a tecla Enter salva, BLUR foi REMOVIDO
             inputNome.addEventListener("keypress", function(e) {
                 if (e.key === "Enter") salvarEdicao(indexReal, inputNome, inputQtd);
             });
@@ -84,13 +85,7 @@ function renderizarLista(){
                 if (e.key === "Enter") salvarEdicao(indexReal, inputNome, inputQtd);
             });
 
-            inputNome.addEventListener("blur", function() {
-                setTimeout(() => salvarEdicao(indexReal, inputNome, inputQtd), 200);
-            });
-            
-            inputQtd.addEventListener("blur", function() {
-                setTimeout(() => salvarEdicao(indexReal, inputNome, inputQtd), 200);
-            });
+            // NÃO TEM MAIS O EVENTO BLUR!
 
             li.appendChild(inputNome);
             li.appendChild(inputQtd);
@@ -126,7 +121,6 @@ function renderizarLista(){
             spanQtd.classList.add("quantidade");
             spanQtd.textContent = item.qtd + "x";
 
-            // Se estiver marcado, adiciona classe para riscar
             if (item.checked) {
                 li.classList.add("item-riscado");
             }
@@ -205,5 +199,4 @@ function paginaAnterior(){
     }
 }
 
-// Inicializa a lista
 renderizarLista();
