@@ -3,6 +3,44 @@ let paginaAtual = 1;
 const itensPorPagina = 8;
 let itemEditando = null;
 
+// Controle de música
+let musicaTocando = false;
+const audio = document.getElementById('musicaFundo');
+const controleMusica = document.getElementById('controleMusica');
+const iconeMusica = document.getElementById('iconeMusica');
+
+// Configurar música
+audio.volume = 0.3; // Volume 30%
+
+controleMusica.addEventListener('click', function() {
+    if (musicaTocando) {
+        audio.pause();
+        iconeMusica.className = 'fa-solid fa-volume-off';
+        controleMusica.classList.add('musica-desligada');
+    } else {
+        audio.play().catch(e => {
+            console.log("Autoplay bloqueado pelo navegador");
+        });
+        iconeMusica.className = 'fa-solid fa-music';
+        controleMusica.classList.remove('musica-desligada');
+    }
+    musicaTocando = !musicaTocando;
+});
+
+// Tenta tocar música automaticamente (pode ser bloqueado pelo navegador)
+window.addEventListener('load', function() {
+    // Toca automaticamente se possível
+    audio.play().then(() => {
+        musicaTocando = true;
+        iconeMusica.className = 'fa-solid fa-music';
+    }).catch(e => {
+        console.log("Autoplay bloqueado - usuário precisa clicar no ícone");
+        musicaTocando = false;
+        iconeMusica.className = 'fa-solid fa-volume-off';
+        controleMusica.classList.add('musica-desligada');
+    });
+});
+
 function adicionarItem(){
 
     let nomeInput = document.getElementById("nome");
@@ -43,7 +81,10 @@ function adicionarItem(){
 }
 
 function toggleCheck(index) {
+    // Marca/desmarca o item
     lista[index].checked = !lista[index].checked;
+    
+    // Renderiza novamente para aplicar a animação apenas neste item
     renderizarLista();
 }
 
@@ -76,7 +117,6 @@ function renderizarLista(){
             inputQtd.min = "1";
             inputQtd.classList.add("input-edicao-qtd");
 
-            // SOMENTE a tecla Enter salva, BLUR foi REMOVIDO
             inputNome.addEventListener("keypress", function(e) {
                 if (e.key === "Enter") salvarEdicao(indexReal, inputNome, inputQtd);
             });
@@ -84,8 +124,6 @@ function renderizarLista(){
             inputQtd.addEventListener("keypress", function(e) {
                 if (e.key === "Enter") salvarEdicao(indexReal, inputNome, inputQtd);
             });
-
-            // NÃO TEM MAIS O EVENTO BLUR!
 
             li.appendChild(inputNome);
             li.appendChild(inputQtd);
@@ -121,6 +159,7 @@ function renderizarLista(){
             spanQtd.classList.add("quantidade");
             spanQtd.textContent = item.qtd + "x";
 
+            // Aplica a classe de riscado apenas se o item estiver marcado
             if (item.checked) {
                 li.classList.add("item-riscado");
             }
@@ -180,6 +219,7 @@ function atualizarInfoPagina(){
     const totalPaginas = Math.ceil(lista.length / itensPorPagina) || 1;
     document.getElementById("numeroPagina").textContent = paginaAtual;
 
+    // Mostra as setas baseado na página atual
     document.getElementById("btnVoltar").style.display = paginaAtual > 1 ? "flex" : "none";
     document.getElementById("btnAvancar").style.display = paginaAtual < totalPaginas ? "flex" : "none";
 }
