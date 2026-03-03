@@ -121,30 +121,29 @@ function proximaPagina(){
     const totalPaginas = Math.ceil(lista.length / itensPorPagina);
 
     if(paginaAtual < totalPaginas){
-
         const container = document.querySelector(".container");
+
         container.classList.add("pagina-animando");
 
         setTimeout(() => {
             paginaAtual++;
             renderizarLista();
             container.classList.remove("pagina-animando");
-        }, 300);
+        }, 350);
     }
 }
 
 function paginaAnterior(){
-
     if(paginaAtual > 1){
-
         const container = document.querySelector(".container");
+
         container.classList.add("pagina-animando");
 
         setTimeout(() => {
             paginaAtual--;
             renderizarLista();
             container.classList.remove("pagina-animando");
-        }, 300);
+        }, 350);
     }
 }
 
