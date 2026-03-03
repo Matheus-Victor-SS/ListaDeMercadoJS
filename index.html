@@ -4,22 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Lista de Compras</title>
-
     <link rel="stylesheet" href="style.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
 
-<!-- Controle de música -->
 <div class="controle-musica" id="controleMusica">
     <i class="fa-solid fa-music" id="iconeMusica"></i>
     <div class="tooltip">Clique para ligar/desligar a música</div>
 </div>
 
 <div class="container">
-
     <h2>📝 Lista de Compras</h2>
 
     <div class="input-area">
@@ -35,7 +30,6 @@
 
     <div class="numero-pagina" id="numeroPagina">1</div>
 
-    <!-- Setas separadas -->
     <div class="setas-container">
         <div class="voltar-pagina" id="btnVoltar" onclick="paginaAnterior()">
             <i class="fa-solid fa-circle-arrow-left"></i>
@@ -44,36 +38,8 @@
             <i class="fa-solid fa-circle-arrow-right"></i>
         </div>
     </div>
-
 </div>
 
-<!-- Áudios -->
-<audio id="somAdicionar" preload="auto">
-    <source src="sons/adicionar.mp3" type="audio/mpeg">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-<audio id="somEditar" preload="auto">
-    <source src="sons/editar.mp3" type="audio/mpeg">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-<audio id="somSalvar" preload="auto">
-    <source src="sons/salvar.mp3" type="audio/mpeg">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-<audio id="somExcluir" preload="auto">
-    <source src="sons/excluir.mp3" type="audio/mpeg">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-<audio id="somRiscar" preload="auto">
-    <source src="sons/riscar.mp3" type="audio/mpeg">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-<audio id="somPagina" preload="auto">
-    <source src="sons/pagina.mp3" type="audio/mpeg">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Música de fundo -->
 <audio id="musicaFundo" loop preload="auto">
     <source src="samuelfrancomusica-tema-jazzistico-feliz-150807.mp3" type="audio/mpeg">
 </audio>

@@ -3,64 +3,18 @@ let paginaAtual = 1;
 const itensPorPagina = 8;
 let itemEditando = null;
 
-// Controle de música
 let musicaTocando = false;
 const audioMusica = document.getElementById('musicaFundo');
 const controleMusica = document.getElementById('controleMusica');
 const iconeMusica = document.getElementById('iconeMusica');
 
-// Elementos de áudio para efeitos
-const sons = {
-    adicionar: document.getElementById('somAdicionar'),
-    editar: document.getElementById('somEditar'),
-    salvar: document.getElementById('somSalvar'),
-    excluir: document.getElementById('somExcluir'),
-    riscar: document.getElementById('somRiscar'),
-    pagina: document.getElementById('somPagina')
-};
-
-// Configurar volumes e pré-carregar sons
-for (let key in sons) {
-    if (sons[key]) {
-        sons[key].volume = 0.3;
-        sons[key].load(); // Pré-carrega o som
-    }
-}
 audioMusica.volume = 0.2;
 
-// Função para tocar som (melhorada)
-function tocarSom(tipo) {
-    if (!musicaTocando) return; // Só toca se a música estiver ativa
-    
-    const som = sons[tipo];
-    if (som) {
-        // Tenta tocar o som
-        som.currentTime = 0; // Reinicia
-        som.play().catch(e => {
-            console.log(`Erro ao tocar som ${tipo}:`, e);
-            // Se falhar, tenta criar um som temporário
-            try {
-                const audioTemp = new Audio(som.querySelector('source').src);
-                audioTemp.volume = 0.3;
-                audioTemp.play().catch(err => console.log('Fallback também falhou'));
-            } catch(err) {
-                console.log('Não foi possível tocar som');
-            }
-        });
-    }
-}
-
-// Controle da música de fundo
 controleMusica.addEventListener('click', function() {
     if (musicaTocando) {
         audioMusica.pause();
         iconeMusica.className = 'fa-solid fa-volume-off';
         controleMusica.classList.add('musica-desligada');
-        
-        // Pausa todos os sons
-        for (let key in sons) {
-            if (sons[key]) sons[key].pause();
-        }
     } else {
         audioMusica.play().catch(e => console.log("Erro ao tocar música"));
         iconeMusica.className = 'fa-solid fa-music';
@@ -69,13 +23,7 @@ controleMusica.addEventListener('click', function() {
     musicaTocando = !musicaTocando;
 });
 
-// Tenta tocar música automaticamente
 window.addEventListener('load', function() {
-    // Pré-carrega todos os áudios
-    for (let key in sons) {
-        if (sons[key]) sons[key].load();
-    }
-    
     audioMusica.play().then(() => {
         musicaTocando = true;
         iconeMusica.className = 'fa-solid fa-music';
@@ -87,8 +35,6 @@ window.addEventListener('load', function() {
 });
 
 function adicionarItem(){
-    tocarSom('adicionar');
-
     let nomeInput = document.getElementById("nome");
     let qtdInput = document.getElementById("quantidade");
     let erro = document.getElementById("erro");
@@ -140,17 +86,10 @@ function adicionarItem(){
 
 function toggleCheck(index) {
     lista[index].checked = !lista[index].checked;
-    
-    // Toca som de riscar apenas se estiver marcando
-    if (lista[index].checked) {
-        tocarSom('riscar');
-    }
-    
     renderizarLista();
 }
 
 function renderizarLista(){
-
     const ul = document.getElementById("lista");
     ul.innerHTML = "";
 
@@ -160,10 +99,8 @@ function renderizarLista(){
 
     itensPagina.forEach((item, indexLocal) => {
         let indexReal = inicio + indexLocal;
-
         let li = document.createElement("li");
         
-        // Se item está sendo editado
         if (itemEditando === indexReal) {
             li.classList.add("editando");
             
@@ -196,24 +133,20 @@ function renderizarLista(){
             botaoConfirmar.classList.add("botao-confirmar");
             botaoConfirmar.onclick = function() {
                 salvarEdicao(indexReal, inputNome, inputQtd);
-                tocarSom('salvar');
             };
             
             li.appendChild(botaoConfirmar);
             
         } else {
-            // Modo normal com checkbox - CORRIGIDO
             let checkboxWrapper = document.createElement("div");
             checkboxWrapper.classList.add("checkbox-wrapper");
             
             let checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.checked = item.checked || false;
-            
-            // Usando onchange para capturar mudanças no checkbox
-            checkbox.addEventListener('change', function() {
+            checkbox.onchange = function() {
                 toggleCheck(indexReal);
-            });
+            };
             
             checkboxWrapper.appendChild(checkbox);
 
@@ -238,7 +171,6 @@ function renderizarLista(){
             botaoEditar.classList.add("botao-editar");
             botaoEditar.onclick = function() {
                 itemEditando = indexReal;
-                tocarSom('editar');
                 renderizarLista();
             };
 
@@ -246,7 +178,6 @@ function renderizarLista(){
             botaoRemover.innerHTML = '<i class="fa-solid fa-trash"></i>';
             botaoRemover.classList.add("botao-remover");
             botaoRemover.onclick = function() {
-                tocarSom('excluir');
                 lista.splice(indexReal, 1);
                 itemEditando = null;
 
@@ -294,10 +225,8 @@ function salvarEdicao(index, inputNome, inputQtd) {
 }
 
 function atualizarInfoPagina(){
-
     const totalPaginas = Math.ceil(lista.length / itensPorPagina) || 1;
     document.getElementById("numeroPagina").textContent = paginaAtual;
-
     document.getElementById("btnVoltar").style.display = paginaAtual > 1 ? "flex" : "none";
     document.getElementById("btnAvancar").style.display = paginaAtual < totalPaginas ? "flex" : "none";
 }
@@ -305,7 +234,6 @@ function atualizarInfoPagina(){
 function proximaPagina(){
     const totalPaginas = Math.ceil(lista.length / itensPorPagina);
     if(paginaAtual < totalPaginas){
-        tocarSom('pagina'); // Som de virar página
         paginaAtual++;
         renderizarLista();
     }
@@ -313,7 +241,6 @@ function proximaPagina(){
 
 function paginaAnterior(){
     if(paginaAtual > 1){
-        tocarSom('pagina'); // Som de virar página
         paginaAtual--;
         renderizarLista();
     }
