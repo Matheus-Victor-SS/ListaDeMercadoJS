@@ -41,15 +41,17 @@ body::after{
 /* CADERNO */
 .container{
     background: #fff8dc;
-    width: 520px;
+    width: 480px;
     max-width: 100%;
-    padding: 30px 30px 90px 80px;
+    padding: 30px 30px 60px 80px;
     border-radius: 12px;
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     position: relative;
     box-sizing: border-box;
-}
 
+    /* ESSENCIAL PARA 3D */
+    perspective: 1000px;
+}
 /* ESPIRAL REDONDA */
 .container::before{
     content: "";
@@ -108,7 +110,7 @@ ul{
     list-style: none;
     padding: 0;
     margin: 0;
-    min-height: 400px;
+    min-height: 360px;
 }
 
 li{
@@ -157,38 +159,28 @@ li{
     font-size: 18px;
     font-weight: bold;
 }
-
-/* SETAS */
-.virar-pagina{
+.virar-pagina,
+.voltar-pagina{
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100px;
-    height: 100px;
-    background: #ff4d4d;
-    clip-path: polygon(0 100%, 100% 0, 100% 100%);
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: 20px;
+    bottom: 15px;
     cursor: pointer;
+    font-size: 40px;
+    color: #e74c3c;
+    transition: transform 0.2s ease;
+}
+
+.virar-pagina{
+    right: 20px;
 }
 
 .voltar-pagina{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100px;
-    height: 100px;
-    background: #ff4d4d;
-    clip-path: polygon(0 0, 0 100%, 100% 100%);
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: 20px;
-    cursor: pointer;
+    left: 20px;
 }
 
+.virar-pagina:hover,
+.voltar-pagina:hover{
+    transform: scale(1.2) rotate(-10deg);
+}
 .virar-pagina i,
 .voltar-pagina i{
     color: white;
@@ -198,7 +190,25 @@ li{
 .animar{
     animation: virarPagina 0.3s ease;
 }
+.pagina-animando{
+    animation: virar3D 0.6s ease forwards;
+    transform-origin: left center;
+}
 
+@keyframes virar3D{
+    0%{
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+    50%{
+        transform: rotateY(-90deg);
+        opacity: 0.5;
+    }
+    100%{
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+}
 @keyframes virarPagina{
     from{
         transform: rotateY(90deg);

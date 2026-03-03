@@ -119,16 +119,32 @@ function atualizarInfoPagina(){
 
 function proximaPagina(){
     const totalPaginas = Math.ceil(lista.length / itensPorPagina);
+
     if(paginaAtual < totalPaginas){
-        paginaAtual++;
-        renderizarLista();
+
+        const container = document.querySelector(".container");
+        container.classList.add("pagina-animando");
+
+        setTimeout(() => {
+            paginaAtual++;
+            renderizarLista();
+            container.classList.remove("pagina-animando");
+        }, 300);
     }
 }
 
 function paginaAnterior(){
+
     if(paginaAtual > 1){
-        paginaAtual--;
-        renderizarLista();
+
+        const container = document.querySelector(".container");
+        container.classList.add("pagina-animando");
+
+        setTimeout(() => {
+            paginaAtual--;
+            renderizarLista();
+            container.classList.remove("pagina-animando");
+        }, 300);
     }
 }
 
