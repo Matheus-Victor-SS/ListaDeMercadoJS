@@ -23,13 +23,12 @@ function adicionarItem(){
     let existe = lista.some(item => item.nome.toLowerCase() === nome);
 
     if(existe){
-        erro.textContent = "Este produto já foi inserido na lista. Não é permitido adicionar produtos repetidos.";
+        erro.textContent = "Este produto já foi inserido.";
         erro.style.display = "block";
         return;
     }
 
     lista.push({nome: nomeInput.value.trim(), qtd: qtd});
-
     nomeInput.value = "";
     qtdInput.value = "";
 
@@ -43,7 +42,6 @@ function renderizarLista(){
 
     let inicio = (paginaAtual - 1) * itensPorPagina;
     let fim = inicio + itensPorPagina;
-
     let itensPagina = lista.slice(inicio, fim);
 
     itensPagina.forEach((item, index) => {
@@ -59,61 +57,43 @@ function renderizarLista(){
         spanQtd.textContent = item.qtd + "x";
 
         let botaoEditar = document.createElement("button");
-botaoEditar.innerHTML = '<i class="fa-solid fa-pen"></i>';
-botaoEditar.classList.add("botao-editar");
+        botaoEditar.innerHTML = '<i class="fa-solid fa-pen"></i>';
+        botaoEditar.classList.add("botao-editar");
 
         botaoEditar.onclick = function(){
-
-            li.classList.add("editando");
-
             let inputNome = document.createElement("input");
             inputNome.value = item.nome;
-            inputNome.classList.add("input-edicao");
 
             let inputQtd = document.createElement("input");
             inputQtd.type = "number";
-            inputQtd.min = "1";
             inputQtd.value = item.qtd;
-            inputQtd.classList.add("input-edicao-qtd");
 
             li.replaceChild(inputNome, spanNome);
             li.replaceChild(inputQtd, spanQtd);
 
             inputNome.focus();
 
-            function salvarSeClicarFora(e){
-                if(!li.contains(e.target)){
-                    salvar();
-                }
-            }
-
             function salvar(){
-
                 item.nome = inputNome.value.trim();
                 item.qtd = inputQtd.value.trim();
-
-                spanNome.textContent = item.nome;
-                spanQtd.textContent = item.qtd + "x";
-
-                li.replaceChild(spanNome, inputNome);
-                li.replaceChild(spanQtd, inputQtd);
-
-                li.classList.remove("editando");
-
-                document.removeEventListener("click", salvarSeClicarFora);
+                renderizarLista();
             }
 
-            setTimeout(() => {
-                document.addEventListener("click", salvarSeClicarFora);
-            }, 0);
+            inputNome.addEventListener("blur", salvar);
+            inputQtd.addEventListener("blur", salvar);
         };
 
         let botaoRemover = document.createElement("button");
-botaoRemover.innerHTML = '<i class="fa-solid fa-trash"></i>';
-botaoRemover.classList.add("botao-remover");
+        botaoRemover.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        botaoRemover.classList.add("botao-remover");
 
         botaoRemover.onclick = function(){
             lista.splice(inicio + index, 1);
+
+            if((paginaAtual - 1) * itensPorPagina >= lista.length && paginaAtual > 1){
+                paginaAtual--;
+            }
+
             renderizarLista();
         };
 
@@ -127,33 +107,21 @@ botaoRemover.classList.add("botao-remover");
 
     atualizarInfoPagina();
 }
+
 function atualizarInfoPagina(){
 
     const totalPaginas = Math.ceil(lista.length / itensPorPagina) || 1;
-
     document.getElementById("numeroPagina").textContent = paginaAtual;
 
-    const btnVoltar = document.getElementById("btnVoltar");
-    const btnAvancar = document.getElementById("btnAvancar");
-
-    btnVoltar.style.display = paginaAtual > 1 ? "flex" : "none";
-    btnAvancar.style.display = paginaAtual < totalPaginas ? "flex" : "none";
+    document.getElementById("btnVoltar").style.display = paginaAtual > 1 ? "flex" : "none";
+    document.getElementById("btnAvancar").style.display = paginaAtual < totalPaginas ? "flex" : "none";
 }
 
 function proximaPagina(){
-
     const totalPaginas = Math.ceil(lista.length / itensPorPagina);
-
     if(paginaAtual < totalPaginas){
         paginaAtual++;
-
-        const ul = document.getElementById("lista");
-        ul.classList.add("animar");
-
-        setTimeout(() => {
-            renderizarLista();
-            ul.classList.remove("animar");
-        }, 200);
+        renderizarLista();
     }
 }
 

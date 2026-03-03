@@ -1,4 +1,3 @@
-/* ===== BODY ===== */
 body{
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
@@ -10,7 +9,7 @@ body{
     overflow-x: hidden;
 }
 
-/* ===== BOLAS FLUTUANDO ===== */
+/* BOLAS */
 body::before,
 body::after{
     content: "";
@@ -39,46 +38,41 @@ body::after{
     to{ transform: translateY(30px); }
 }
 
-/* ===== CADERNO ===== */
+/* CADERNO */
 .container{
     background: #fff8dc;
-    width: 500px; 
+    width: 520px;
     max-width: 100%;
-    padding: 30px 30px 80px 70px;
+    padding: 30px 30px 90px 80px;
     border-radius: 12px;
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     position: relative;
     box-sizing: border-box;
 }
 
-/* ===== ESPIRAL LATERAL ===== */
+/* ESPIRAL REDONDA */
 .container::before{
     content: "";
     position: absolute;
     left: 25px;
     top: 20px;
     bottom: 20px;
-    width: 6px;
-    background: repeating-linear-gradient(
-        to bottom,
-        #999,
-        #999 6px,
-        transparent 6px,
-        transparent 20px
-    );
+    width: 18px;
+    background: radial-gradient(circle, #999 4px, transparent 5px);
+    background-size: 18px 26px;
 }
 
+/* LINHA VERMELHA */
 .container::after{
     content: "";
     position: absolute;
-    left: 40px;
+    left: 60px;
     top: 0;
     bottom: 0;
     width: 2px;
     background: #ff4d4d;
 }
 
-/* ===== INPUT AREA ===== */
 .input-area{
     display: flex;
     flex-direction: column;
@@ -92,7 +86,6 @@ input{
     border: 1px solid #ccc;
 }
 
-/* ===== BOTÃO ADICIONAR ===== */
 .btn-adicionar{
     background: #5dade2;
     color: white;
@@ -102,11 +95,6 @@ input{
     cursor: pointer;
 }
 
-.btn-adicionar:hover{
-    opacity: 0.9;
-}
-
-/* ===== ERRO ===== */
 .erro{
     display: none;
     padding: 8px;
@@ -115,12 +103,12 @@ input{
     color: #cc0000;
 }
 
-/* ===== LISTA ===== */
+/* LISTA 10 ITENS */
 ul{
     list-style: none;
     padding: 0;
     margin: 0;
-    min-height: 280px; /* espaço para ~7 itens */
+    min-height: 400px;
 }
 
 li{
@@ -145,18 +133,24 @@ li{
     text-align: right;
 }
 
-/* ===== BOTÕES ===== */
+/* ÍCONES SEM CAIXA */
+.botao-editar,
+.botao-remover{
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 18px;
+    cursor: pointer;
+}
+
 .botao-editar{
     color: #5dade2;
-    cursor: pointer;
 }
 
 .botao-remover{
     color: #e74c3c;
-    cursor: pointer;
 }
 
-/* ===== NÚMERO DA PÁGINA ===== */
 .numero-pagina{
     text-align: center;
     margin-top: 15px;
@@ -164,51 +158,45 @@ li{
     font-weight: bold;
 }
 
-/* ===== SETA VIRAR PÁGINA ===== */
+/* SETAS */
 .virar-pagina{
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     background: #ff4d4d;
     clip-path: polygon(0 100%, 100% 0, 100% 100%);
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    padding: 15px;
+    padding: 20px;
     cursor: pointer;
 }
 
-.virar-pagina i{
-    color: white;
-    font-size: 26px;
-}
-
-/* ===== BOTÃO VOLTAR ===== */
 .voltar-pagina{
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     background: #ff4d4d;
     clip-path: polygon(0 0, 0 100%, 100% 100%);
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-    padding: 15px;
+    padding: 20px;
     cursor: pointer;
 }
 
+.virar-pagina i,
 .voltar-pagina i{
     color: white;
-    font-size: 26px;
+    font-size: 28px;
 }
 
-/* ===== ANIMAÇÃO DE VIRAR ===== */
 .animar{
-    animation: virarPagina 0.4s ease;
+    animation: virarPagina 0.3s ease;
 }
 
 @keyframes virarPagina{
