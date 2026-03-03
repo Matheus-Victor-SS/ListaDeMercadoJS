@@ -98,7 +98,7 @@ body::after{
     background: #fff8dc;
     width: 480px;
     max-width: 100%;
-    padding: 25px 30px 5px 80px; /* Padding inferior reduzido para 5px */
+    padding: 25px 30px 15px 80px;
     border-radius: 15px;
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     position: relative;
@@ -133,19 +133,19 @@ h2 {
     color: #2c3e50;
     font-size: 26px;
     margin-top: 5px;
-    margin-bottom: 15px; /* Reduzido */
+    margin-bottom: 20px;
     text-shadow: 3px 3px 0 rgba(93, 173, 226, 0.3);
 }
 
 .input-area{
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Reduzido */
-    margin-bottom: 10px; /* Reduzido */
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 input{
-    padding: 8px 12px; /* Reduzido */
+    padding: 10px 12px;
     border-radius: 50px;
     border: 2px solid #ffb6c1;
     font-family: 'Comic Neue', cursive;
@@ -165,7 +165,7 @@ input:focus {
     background: #5dade2;
     color: white;
     border: none;
-    padding: 10px; /* Reduzido */
+    padding: 12px;
     border-radius: 50px;
     cursor: pointer;
     font-family: 'Fredoka One', cursive;
@@ -182,7 +182,7 @@ input:focus {
 
 .erro{
     display: none;
-    padding: 6px 15px; /* Reduzido */
+    padding: 8px 15px;
     border-radius: 50px;
     background-color: #ffe6e6;
     color: #cc0000;
@@ -195,14 +195,14 @@ ul{
     list-style: none;
     padding: 0;
     margin: 0 0 5px 0;
-    min-height: 240px; /* REDUZIDO - ANTES ERA 280px */
+    min-height: 280px;
 }
 
 li{
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 0; /* Reduzido */
+    padding: 8px 0;
     border-bottom: 2px dashed #ffb6c1;
     transition: all 0.3s ease;
 }
@@ -216,11 +216,11 @@ li{
 }
 
 .checkbox-wrapper input[type="checkbox"] {
-    width: 20px; /* Reduzido */
-    height: 20px; /* Reduzido */
+    width: 22px;
+    height: 22px;
     cursor: pointer;
     accent-color: #5dade2;
-    transform: scale(1);
+    transform: scale(1.1);
 }
 
 .nome-produto{
@@ -259,13 +259,13 @@ li{
 }
 
 .quantidade{
-    min-width: 45px; /* Reduzido */
+    min-width: 50px;
     text-align: right;
     font-family: 'Fredoka One', cursive;
-    font-size: 18px; /* Reduzido */
+    font-size: 20px;
     color: #e67e22;
     background-color: #fff0e0;
-    padding: 3px 8px; /* Reduzido */
+    padding: 4px 10px;
     border-radius: 30px;
     margin: 0 5px;
 }
@@ -273,25 +273,25 @@ li{
 /* Inputs de edição */
 .input-edicao-nome {
     flex: 1;
-    padding: 6px 12px; /* Reduzido */
+    padding: 8px 12px;
     border: 2px solid #5dade2;
     border-radius: 30px;
     font-family: 'Comic Neue', cursive;
     font-size: 18px;
     font-weight: bold;
-    height: 36px; /* Reduzido */
+    height: 40px;
     box-sizing: border-box;
 }
 
 .input-edicao-qtd {
-    width: 65px; /* Reduzido */
-    padding: 6px 12px; /* Reduzido */
+    width: 70px;
+    padding: 8px 12px;
     border: 2px solid #5dade2;
     border-radius: 30px;
     font-family: 'Fredoka One', cursive;
     font-size: 18px;
     text-align: center;
-    height: 36px; /* Reduzido */
+    height: 40px;
     box-sizing: border-box;
 }
 
@@ -301,8 +301,8 @@ li{
 .botao-confirmar {
     background: none;
     border: none;
-    padding: 0 3px; /* Reduzido */
-    font-size: 18px; /* Reduzido */
+    padding: 0 5px;
+    font-size: 20px;
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -322,19 +322,19 @@ li{
 .botao-editar:hover,
 .botao-remover:hover,
 .botao-confirmar:hover{
-    transform: scale(1.2) rotate(5deg);
+    transform: scale(1.3) rotate(5deg);
 }
 
 /* Área de paginação */
 .numero-pagina{
     text-align: center;
-    margin: 2px 0; /* Reduzido */
+    margin: 5px 0;
     font-family: 'Fredoka One', cursive;
-    font-size: 18px; /* Reduzido */
+    font-size: 20px;
     color: #e74c3c;
     background-color: white;
     display: inline-block;
-    padding: 3px 15px; /* Reduzido */
+    padding: 5px 20px;
     border-radius: 50px;
     border: 2px solid #ffb6c1;
     position: relative;
@@ -348,8 +348,7 @@ li{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: 2px; /* Reduzido */
-    margin-bottom: 0; /* ZERO para terminar exatamente aqui */
+    margin-top: 10px;
     padding: 0 10px;
     box-sizing: border-box;
 }
@@ -357,7 +356,7 @@ li{
 .virar-pagina,
 .voltar-pagina{
     cursor: pointer;
-    font-size: 40px; /* Reduzido */
+    font-size: 45px;
     color: #e74c3c;
     transition: all 0.2s;
     line-height: 1;
