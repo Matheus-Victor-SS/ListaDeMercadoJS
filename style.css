@@ -1,143 +1,208 @@
-body {
-    margin: 0;
-    padding: 40px 0;
-    font-family: Arial, sans-serif;
-    background: #cfe3ff;
+body{
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
-}
-
-.container {
-    width: 360px;
-    background: #f5eecf;
-    border-radius: 15px;
-    padding: 25px 20px 60px 40px;
+    padding: 40px 15px;
+    min-height: 100vh;
+    background-color: #eaf4ff;
     position: relative;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    transition: 0.2s ease;
+    overflow-x: hidden;
 }
 
-/* Espiral */
-.container::before {
+/* BOLAS FUNDO */
+body::before,
+body::after{
+    content: "";
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: rgba(100,170,255,0.15);
+    border-radius: 50%;
+    z-index: -1;
+    animation: flutuar 8s ease-in-out infinite alternate;
+}
+
+body::before{
+    top: -100px;
+    left: -100px;
+}
+
+body::after{
+    bottom: -150px;
+    right: -120px;
+    animation-delay: 2s;
+}
+
+@keyframes flutuar{
+    from{ transform: translateY(0px); }
+    to{ transform: translateY(30px); }
+}
+
+/* ===== CADERNO AJUSTADO ===== */
+.container{
+    background: #fff8dc;
+    width: 460px;
+    max-width: 100%;
+    padding: 30px 30px 40px 80px; /* MENOR */
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    position: relative;
+    box-sizing: border-box;
+    perspective: 1200px;
+}
+
+/* ESPIRAL REDONDA */
+.container::before{
     content: "";
     position: absolute;
-    left: 12px;
+    left: 25px;
+    top: 20px;
+    bottom: 20px;
+    width: 18px;
+    background: radial-gradient(circle, #999 4px, transparent 5px);
+    background-size: 18px 26px;
+}
+
+/* LINHA VERMELHA */
+.container::after{
+    content: "";
+    position: absolute;
+    left: 60px;
     top: 0;
     bottom: 0;
-    width: 4px;
-    background: red;
+    width: 2px;
+    background: #ff4d4d;
 }
 
-h2 {
-    text-align: center;
-    margin-top: 0;
-}
-
-.input-area {
+/* INPUT AREA */
+.input-area{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
-input {
+input{
     padding: 8px;
     border-radius: 6px;
     border: 1px solid #ccc;
 }
 
-.btn-adicionar {
-    padding: 8px;
-    background: #5ea2d6;
+.btn-adicionar{
+    background: #5dade2;
     color: white;
     border: none;
+    padding: 10px;
     border-radius: 6px;
     cursor: pointer;
 }
 
-.erro {
-    color: red;
-    font-size: 13px;
+.erro{
     display: none;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #ffe6e6;
+    color: #cc0000;
 }
 
-/* LISTA */
-ul {
+/* LISTA AJUSTADA (MENOR ALTURA) */
+ul{
     list-style: none;
     padding: 0;
-    margin-top: 20px;
-    min-height: 360px; /* espaço exato pra 10 itens */
+    margin: 0;
+    min-height: 200px; /* REDUZIDO */
 }
 
-/* ITEM */
-li {
+li{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 10px;
     padding: 6px 0;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.item-info {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+.nome-produto{
     flex: 1;
 }
 
-.qtd {
-    font-weight: bold;
+.quantidade{
+    width: 45px;
+    text-align: right;
 }
 
-.acoes {
-    display: flex;
-    gap: 10px;
-}
-
-.fa-pen {
-    color: #5ea2d6;
+/* ÍCONES LIMPOS */
+.botao-editar,
+.botao-remover{
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 18px;
     cursor: pointer;
 }
 
-.fa-trash {
+.botao-editar{
+    color: #5dade2;
+}
+
+.botao-remover{
+    color: #e74c3c;
+}
+
+/* NUMERO PÁGINA */
+.numero-pagina{
+    text-align: center;
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ===== SETAS VERMELHAS (SEM BRANCO) ===== */
+.virar-pagina,
+.voltar-pagina{
+    position: absolute;
+    bottom: 10px;
+    font-size: 34px;
     color: #e74c3c;
     cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-/* Inputs de edição menores */
-.edit-input {
-    width: 70px;
-    padding: 4px;
-    font-size: 14px;
-}
-
-/* Numero da página */
-.numero-pagina {
-    text-align: center;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-/* Setas */
-.virar-pagina,
-.voltar-pagina {
-    position: absolute;
-    bottom: 15px;
-    font-size: 24px;
-    color: red;
-    cursor: pointer;
-}
-
-.virar-pagina {
+.virar-pagina{
     right: 15px;
 }
 
-.voltar-pagina {
+.voltar-pagina{
     left: 15px;
 }
 
-/* Responsivo */
-@media (max-width: 480px) {
-    .container {
-        width: 95%;
+.virar-pagina:hover,
+.voltar-pagina:hover{
+    transform: scale(1.2);
+}
+
+/* REMOVE COR BRANCA DO ÍCONE */
+.virar-pagina i,
+.voltar-pagina i{
+    color: #e74c3c;
+}
+
+/* ===== ANIMAÇÃO REALISTA DE VIRAR FOLHA ===== */
+.pagina-animando{
+    animation: virarFolhaReal 0.7s ease forwards;
+    transform-origin: left center;
+}
+
+@keyframes virarFolhaReal{
+    0%{
+        transform: rotateY(0deg);
+    }
+    40%{
+        transform: rotateY(-100deg);
+    }
+    60%{
+        transform: rotateY(-100deg);
+    }
+    100%{
+        transform: rotateY(0deg);
     }
 }
