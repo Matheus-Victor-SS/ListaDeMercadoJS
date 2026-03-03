@@ -1,6 +1,5 @@
 # 📝 Lista de Compras Interativa
 
-![Version](https://img.shields.io/badge/version-2.0-green.svg)
 ![Mobile](https://img.shields.io/badge/responsive-yes-brightgreen.svg)
 ![HTML](https://img.shields.io/badge/HTML-5-orange)
 ![CSS](https://img.shields.io/badge/CSS-3-blue)
