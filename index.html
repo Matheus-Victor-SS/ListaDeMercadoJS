@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Lista de Compras</title>
 
     <link rel="stylesheet" href="style.css">
@@ -23,9 +23,11 @@
     <h2>📝 Lista de Compras</h2>
 
     <div class="input-area">
-        <input type="text" id="nome" placeholder="Produto">
-        <input type="number" id="quantidade" placeholder="Qtd" min="1">
-        <button class="btn-adicionar" onclick="adicionarItem()">Adicionar</button>
+        <input type="text" id="nome" placeholder="Produto" maxlength="30">
+        <input type="number" id="quantidade" placeholder="Qtd" min="1" max="999">
+        <button class="btn-adicionar" onclick="adicionarItem()">
+            <i class="fa-solid fa-plus"></i> Adicionar
+        </button>
         <div id="erro" class="erro"></div>
     </div>
 
@@ -45,11 +47,31 @@
 
 </div>
 
-<!-- Áudio (escondido) -->
-<audio id="musicaFundo" loop>
-    <source src="samuelfrancomusica-tema-jazzistico-feliz-150807.mp3" type="audio/mpeg">
-    <!-- Fallback caso não carregue -->
-    Seu navegador não suporta áudio.
+<!-- Áudios -->
+<audio id="somAdicionar" preload="auto">
+    <source src="sons/adicionar.mp3" type="audio/mpeg">
+</audio>
+<audio id="somEditar" preload="auto">
+    <source src="sons/editar.mp3" type="audio/mpeg">
+</audio>
+<audio id="somSalvar" preload="auto">
+    <source src="sons/salvar.mp3" type="audio/mpeg">
+</audio>
+<audio id="somExcluir" preload="auto">
+    <source src="sons/excluir.mp3" type="audio/mpeg">
+</audio>
+<audio id="somRiscar" preload="auto">
+    <source src="sons/riscar.mp3" type="audio/mpeg">
+</audio>
+<audio id="somPagina" preload="auto">
+    <source src="sons/pagina.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Música de fundo -->
+<audio id="musicaFundo" loop preload="auto">
+    <source src="sons/musica-fundo.mp3" type="audio/mpeg">
+    <!-- Fallback: música online -->
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
 <script src="script.js"></script>
