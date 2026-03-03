@@ -16,31 +16,32 @@
 
     <div class="container">
 
-        <h2>Lista de Compras</h2>
+        <div class="container">
 
-        <div class="input-area">
+    <h2>Lista de Compras</h2>
 
-            <input type="text" id="nome" placeholder="Produto">
-            <input type="number" id="quantidade" placeholder="Qtd" min="1">
-
-            <button class="btn-adicionar" onclick="adicionarItem()">
-                Adicionar
-            </button>
-
-            <div id="erro" class="erro"></div>
-
-        </div>
-
-        <ul id="lista"></ul>
-
-        <div class="numero-pagina" id="numeroPagina">1</div>
-
+    <div class="input-area">
+        <input type="text" id="nome" placeholder="Produto">
+        <input type="number" id="quantidade" placeholder="Qtd" min="1">
+        <button class="btn-adicionar" onclick="adicionarItem()">Adicionar</button>
+        <div id="erro" class="erro"></div>
     </div>
 
-    <!-- Folha dobrada com seta -->
-    <div class="virar-pagina" onclick="proximaPagina()">
+    <ul id="lista"></ul>
+
+    <div class="numero-pagina" id="numeroPagina">1</div>
+
+    <!-- VOLTAR (aparece só se página > 1) -->
+    <div class="voltar-pagina" id="btnVoltar" onclick="paginaAnterior()" style="display:none;">
+        <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
+    <!-- AVANÇAR -->
+    <div class="virar-pagina" id="btnAvancar" onclick="proximaPagina()">
         <i class="fa-solid fa-arrow-right"></i>
     </div>
+
+</div>
 
     <!-- JS -->
     <script src="script.js"></script>

@@ -128,7 +128,16 @@ botaoRemover.classList.add("botao-remover");
     atualizarInfoPagina();
 }
 function atualizarInfoPagina(){
+
+    const totalPaginas = Math.ceil(lista.length / itensPorPagina) || 1;
+
     document.getElementById("numeroPagina").textContent = paginaAtual;
+
+    const btnVoltar = document.getElementById("btnVoltar");
+    const btnAvancar = document.getElementById("btnAvancar");
+
+    btnVoltar.style.display = paginaAtual > 1 ? "flex" : "none";
+    btnAvancar.style.display = paginaAtual < totalPaginas ? "flex" : "none";
 }
 
 function proximaPagina(){
