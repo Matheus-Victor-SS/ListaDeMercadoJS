@@ -1,7 +1,7 @@
 let lista = [];
 let paginaAtual = 1;
-const itensPorPagina = 10;
-let itemEditando = null; // Controla qual item está sendo editado
+const itensPorPagina = 8; // Reduzido para 8 itens por página (tela menor)
+let itemEditando = null;
 
 function adicionarItem(){
 
@@ -16,25 +16,34 @@ function adicionarItem(){
     erro.textContent = "";
 
     if(nome === "" || qtd === ""){
-        erro.textContent = "Preencha o nome do produto e a quantidade.";
+        erro.textContent = "Preencha o nome do produto e a quantidade! ✏️";
         erro.style.display = "block";
         return;
     }
 
-    // Converte para minúsculo apenas para comparação
     let nomeLower = nome.toLowerCase();
     let existe = lista.some(item => item.nome.toLowerCase() === nomeLower);
 
     if(existe){
-        erro.textContent = "Este produto já foi inserido.";
+        erro.textContent = "Este produto já foi inserido! 🛒";
         erro.style.display = "block";
         return;
     }
 
-    lista.push({nome: nome, qtd: qtd});
+    lista.push({
+        nome: nome,
+        qtd: qtd,
+        checked: false // Adiciona propriedade checked
+    });
+    
     nomeInput.value = "";
     qtdInput.value = "";
 
+    renderizarLista();
+}
+
+function toggleCheck(index) {
+    lista[index].checked = !lista[index].checked;
     renderizarLista();
 }
 
@@ -52,7 +61,7 @@ function renderizarLista(){
 
         let li = document.createElement("li");
         
-        // Se este item está sendo editado, renderiza com inputs
+        // Se item está sendo editado
         if (itemEditando === indexReal) {
             li.classList.add("editando");
             
@@ -67,7 +76,6 @@ function renderizarLista(){
             inputQtd.min = "1";
             inputQtd.classList.add("input-edicao-qtd");
 
-            // Evento para salvar ao pressionar Enter
             inputNome.addEventListener("keypress", function(e) {
                 if (e.key === "Enter") salvarEdicao(indexReal, inputNome, inputQtd);
             });
@@ -76,8 +84,6 @@ function renderizarLista(){
                 if (e.key === "Enter") salvarEdicao(indexReal, inputNome, inputQtd);
             });
 
-            // Evento para salvar ao perder o foco (blur) com pequeno delay
-            // para não conflitar com o clique no botão de editar
             inputNome.addEventListener("blur", function() {
                 setTimeout(() => salvarEdicao(indexReal, inputNome, inputQtd), 200);
             });
@@ -89,11 +95,9 @@ function renderizarLista(){
             li.appendChild(inputNome);
             li.appendChild(inputQtd);
             
-            // Botão de confirmar edição (opcional, mas útil)
             let botaoConfirmar = document.createElement("button");
             botaoConfirmar.innerHTML = '<i class="fa-solid fa-check"></i>';
-            botaoConfirmar.classList.add("botao-editar");
-            botaoConfirmar.style.color = "#27ae60";
+            botaoConfirmar.classList.add("botao-confirmar");
             botaoConfirmar.onclick = function() {
                 salvarEdicao(indexReal, inputNome, inputQtd);
             };
@@ -101,7 +105,19 @@ function renderizarLista(){
             li.appendChild(botaoConfirmar);
             
         } else {
-            // Modo normal de visualização
+            // Modo normal com checkbox
+            let checkboxWrapper = document.createElement("div");
+            checkboxWrapper.classList.add("checkbox-wrapper");
+            
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = item.checked || false;
+            checkbox.onchange = function() {
+                toggleCheck(indexReal);
+            };
+            
+            checkboxWrapper.appendChild(checkbox);
+
             let spanNome = document.createElement("span");
             spanNome.classList.add("nome-produto");
             spanNome.textContent = item.nome;
@@ -109,6 +125,11 @@ function renderizarLista(){
             let spanQtd = document.createElement("span");
             spanQtd.classList.add("quantidade");
             spanQtd.textContent = item.qtd + "x";
+
+            // Se estiver marcado, adiciona classe para riscar
+            if (item.checked) {
+                li.classList.add("item-riscado");
+            }
 
             let botaoEditar = document.createElement("button");
             botaoEditar.innerHTML = '<i class="fa-solid fa-pen"></i>';
@@ -123,9 +144,8 @@ function renderizarLista(){
             botaoRemover.classList.add("botao-remover");
             botaoRemover.onclick = function() {
                 lista.splice(indexReal, 1);
-                itemEditando = null; // Limpa edição ao remover
+                itemEditando = null;
 
-                // Ajusta página se necessário
                 if((paginaAtual - 1) * itensPorPagina >= lista.length && paginaAtual > 1){
                     paginaAtual--;
                 }
@@ -133,6 +153,7 @@ function renderizarLista(){
                 renderizarLista();
             };
 
+            li.appendChild(checkboxWrapper);
             li.appendChild(spanNome);
             li.appendChild(spanQtd);
             li.appendChild(botaoEditar);
@@ -165,43 +186,22 @@ function atualizarInfoPagina(){
     const totalPaginas = Math.ceil(lista.length / itensPorPagina) || 1;
     document.getElementById("numeroPagina").textContent = paginaAtual;
 
-    // Mostra ou esconde as setas baseado na página atual
     document.getElementById("btnVoltar").style.display = paginaAtual > 1 ? "flex" : "none";
     document.getElementById("btnAvancar").style.display = paginaAtual < totalPaginas ? "flex" : "none";
 }
 
 function proximaPagina(){
     const totalPaginas = Math.ceil(lista.length / itensPorPagina);
-
     if(paginaAtual < totalPaginas){
-        const container = document.querySelector(".container");
-        
-        // Remove classe anterior e adiciona nova
-        container.classList.remove("virando-tras");
-        container.classList.add("virando-frente");
-
-        setTimeout(() => {
-            paginaAtual++;
-            renderizarLista();
-            container.classList.remove("virando-frente");
-        }, 300);
+        paginaAtual++;
+        renderizarLista();
     }
 }
 
 function paginaAnterior(){
-
     if(paginaAtual > 1){
-        const container = document.querySelector(".container");
-        
-        // Remove classe anterior e adiciona nova
-        container.classList.remove("virando-frente");
-        container.classList.add("virando-tras");
-
-        setTimeout(() => {
-            paginaAtual--;
-            renderizarLista();
-            container.classList.remove("virando-tras");
-        }, 300);
+        paginaAtual--;
+        renderizarLista();
     }
 }
 
