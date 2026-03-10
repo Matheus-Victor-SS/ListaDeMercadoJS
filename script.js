@@ -16,17 +16,7 @@ const controleMusica = document.getElementById('controleMusica');
 const iconeMusica = document.getElementById('iconeMusica');
 
 //Carregando o banco quando ele for aberto
-//esta carregando assim que o HTML termina de processar para nao dar erro
 window.onload = function () {
-
-    console.log("pagina carregou");
-
-    carregarLista();
-
-};
-
-function carregarLista() {
-
     const dados = localStorage.getItem("listaMercado");
 
     if (dados) {
@@ -35,6 +25,7 @@ function carregarLista() {
 
     renderizarLista();
 }
+
 audioMusica.volume = 0.2;
 //ve se a musica ta tocando
 controleMusica.addEventListener('click', function() {
@@ -290,5 +281,4 @@ function paginaAnterior(){
         renderizarLista();
     }
 }
-salvarBanco();
 renderizarLista();
