@@ -1,4 +1,5 @@
-//guarda itens tipo num JSON:
+//MINHAS ANOTAÇÕES DE ESTUDO DO QUE ACHO IMPORTANTE
+//guarda itens tipo num JSON la no HTML:
 //{
 // nome: "Arroz",
 // qtd: "2",
@@ -13,6 +14,15 @@ let musicaTocando = false;
 const audioMusica = document.getElementById('musicaFundo');
 const controleMusica = document.getElementById('controleMusica');
 const iconeMusica = document.getElementById('iconeMusica');
+//Carregando o banco quando ele for aberto
+window.onload = function(){
+    const dados = this.localStorage.getItem("ListaMercado");
+    if(dados){
+        //JSON.parse() transforma os dados salvos como string em objeto
+        lista.JSON.parse(dados);
+    }
+    renderizarLista();
+}
 
 audioMusica.volume = 0.2;
 //ve se a musica ta tocando
@@ -86,12 +96,21 @@ function adicionarItem(){
     //limpa os inputs
     nomeInput.value = "";
     qtdInput.value = "";
-
+//salva antes de renderizar
+    salvarBanco();
     renderizarLista();
 }
+
+//salvar banco de dados
+function salvarBanco(){
+    //salva no banco local do navegador, mas converte e salva a lista como uma string
+    localStorage.setItem("listaMercado", JSON.stringify(lista));
+}
+
 //marcar o item comprado pelo num do index
 function toggleCheck(index) {
     lista[index].checked = !lista[index].checked;
+    salvarBanco();
     renderizarLista();
 }
 //a função que é ativada no final de cada processo e atualiza a lista
@@ -177,6 +196,7 @@ function renderizarLista(){
             botaoEditar.classList.add("botao-editar");
             botaoEditar.onclick = function() {
                 itemEditando = indexReal;
+                salvarBanco();
                 renderizarLista();
             };
 //bbotão remover
@@ -191,7 +211,7 @@ function renderizarLista(){
                 if((paginaAtual - 1) * itensPorPagina >= lista.length && paginaAtual > 1){
                     paginaAtual--;
                 }
-
+                salvarBanco();
                 renderizarLista();
             };
 
@@ -213,7 +233,7 @@ function renderizarLista(){
 
     atualizarInfoPagina();
 }
-//salvar
+//salvar edição
 function salvarEdicao(index, inputNome, inputQtd) {
     if (!inputNome || !inputQtd) return;
     
@@ -229,6 +249,7 @@ function salvarEdicao(index, inputNome, inputQtd) {
     }
     
     itemEditando = null;
+    salvarBanco();
     renderizarLista();
 }
 //numero de paginas
@@ -253,8 +274,9 @@ function paginaAnterior(){
     if(paginaAtual > 1){
         //diminui a pagina em 1
         paginaAtual--;
+        salvarBanco();
         renderizarLista();
     }
 }
-
+salvarBanco();
 renderizarLista();
