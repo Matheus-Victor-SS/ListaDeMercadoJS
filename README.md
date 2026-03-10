@@ -7,7 +7,7 @@
 
 ## 🎵 Uma Lista de Compras com Estilo de Caderno e Trilha Sonora!
 
-Transforme suas compras em uma experiência divertida! Este projeto é uma lista de compras interativa com design de caderno, animações suaves e música ambiente para tornar suas compras mais agradáveis.
+Transforme suas compras em uma experiência divertida! Este projeto é uma lista de compras interativa com design de caderno, animações suaves e música ambiente para armazenar suas compras de forma mais agradáveis.
 
 <div align="center">
   <img src="cap.png" alt="Preview do Projeto" width="80%">
@@ -19,6 +19,10 @@ Transforme suas compras em uma experiência divertida! Este projeto é uma lista
 - Design realista de folha de caderno com espiral e margem vermelha
 - Efeito flutuante no fundo com bolinhas animadas
 - Fonte cartoon divertida e amigável
+
+### ☁️ **Armazena os dados**
+- Armazena localmente através da função localStorage
+- Ao reiniciar a página os itens continuam lá
 
 ### 🎮 **Controles Intuitivos**
 - **Checkbox interativos** - Marque seus itens e veja o texto ser riscado automaticamente
