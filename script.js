@@ -14,9 +14,11 @@ let musicaTocando = false;
 const audioMusica = document.getElementById('musicaFundo');
 const controleMusica = document.getElementById('controleMusica');
 const iconeMusica = document.getElementById('iconeMusica');
+
+console.log(localStorage.getItem("listaMercado"));
 //Carregando o banco quando ele for aberto
 window.onload = function(){
-    const dados = this.localStorage.getItem("ListaMercado");
+    const dados = localStorage.getItem("ListaMercado");
     if(dados){
         //JSON.parse() transforma os dados salvos como string em objeto
         lista.JSON.parse(dados);
@@ -103,6 +105,7 @@ function adicionarItem(){
 
 //salvar banco de dados
 function salvarBanco(){
+    console.log("salvando...", lista);
     //salva no banco local do navegador, mas converte e salva a lista como uma string
     localStorage.setItem("listaMercado", JSON.stringify(lista));
 }
@@ -266,6 +269,7 @@ function proximaPagina(){
     if(paginaAtual < totalPaginas){
         //aumenta a pagina em 1
         paginaAtual++;
+        salvarBanco();
         renderizarLista();
     }
 }
