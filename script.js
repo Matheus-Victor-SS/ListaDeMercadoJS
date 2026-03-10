@@ -15,16 +15,16 @@ const audioMusica = document.getElementById('musicaFundo');
 const controleMusica = document.getElementById('controleMusica');
 const iconeMusica = document.getElementById('iconeMusica');
 
-console.log(localStorage.getItem("listaMercado"));
 //Carregando o banco quando ele for aberto
-window.onload = function(){
+//esta carregando assim que o HTML termina de processar para nao dar erro
+document.addEventListener("DOMContentLoaded", function(){
     const dados = localStorage.getItem("ListaMercado");
     if(dados){
         //JSON.parse() transforma os dados salvos como string em objeto
         lista.JSON.parse(dados);
     }
     renderizarLista();
-}
+});
 
 audioMusica.volume = 0.2;
 //ve se a musica ta tocando
@@ -105,7 +105,6 @@ function adicionarItem(){
 
 //salvar banco de dados
 function salvarBanco(){
-    console.log("salvando...", lista);
     //salva no banco local do navegador, mas converte e salva a lista como uma string
     localStorage.setItem("listaMercado", JSON.stringify(lista));
 }
